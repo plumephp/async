@@ -177,7 +177,7 @@ class Application implements \ArrayAccess{
 		$module = $nameArr[0];
 		$class = $nameArr[1];
 		$method = $nameArr[2];
-		$className = "{$module}\\{$class}";
+		$className = "{$module}\\"."Worker"."\\{$class}";
 		$pid = pcntl_fork();
 		switch ($pid) {
 			case -1://error
@@ -202,7 +202,8 @@ class Application implements \ArrayAccess{
 		foreach ($server as $host => $port) {
 			$worker->addServer($host, (int)$port);
 		}
-		$job = new $class();
+		//初始化启动环境
+		$job = new $class($this['plume.env']);
 		$worker->addFunction($name, array($job, $method));
 		while ($worker->work());
 	}
