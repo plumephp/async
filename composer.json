@@ -5,7 +5,7 @@
     "license": "BSD-2-Clause",
     "minimum-stability": "dev",
     "require": {
-        "plumephp/plume": "dev",
+        "plumephp/plume": "dev"
     },
     "autoload": {
         "psr-4": { 
