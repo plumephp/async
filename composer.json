@@ -1,0 +1,18 @@
+{
+    "name": "plumephp/async",
+    "description": "A async lib for PlumePHP.",
+    "type": "library",
+    "license": "BSD-2-Clause",
+    "minimum-stability": "dev",
+    "require": {
+        "plumephp/plume": "dev",
+    },
+    "autoload": {
+        "psr-4": { 
+            "Plume\\Async\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.5.7"
+    }
+}
