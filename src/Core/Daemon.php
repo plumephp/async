@@ -5,7 +5,7 @@ namespace Plume\Async\Core;
 use Plume\Application;
 use Plume\Core\ApplicationTrait;
 
-abstract class Daemon{
+class Daemon{
 
 	use ApplicationTrait;
 
@@ -17,8 +17,4 @@ abstract class Daemon{
         //这里由于无法进行web路径解析，所以通过传递类名来设置log的文件名
         $this->app['plume.request.path.full'] = $fileName;
     }
-
-    //守护型进程启动后的入口方法
-    abstract function run();
-
 }
