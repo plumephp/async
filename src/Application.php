@@ -202,7 +202,7 @@ class Application implements \ArrayAccess{
         $instance = new $class($this['plume.env']);
         if($instance instanceof Daemon){
             $this->debug("startWorker", $name." is a daemon process");
-            $instance->run();
+            call_user_func(array($instance, $method));
             return;
         }
         $this->debug("startWorker", $name." is a gearmand worker");
