@@ -44,8 +44,8 @@ class Application implements \ArrayAccess{
 
 		$this->loadWorkers();
 
-		// $this->daemon();
-		$this->daemonSocket();
+		$this->daemon();
+		// $this->daemonSocket();
 	}
 
 	public function daemonSocket(){
@@ -125,7 +125,7 @@ class Application implements \ArrayAccess{
 
 	public function daemon(){
 		while (true) {
-			sleep(30);
+			sleep(60*10);
 			$this->validate();
 		}
 	}
