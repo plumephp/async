@@ -16,6 +16,8 @@ use Plume\Provider\ProviderTrait;
 use Plume\Async\Core\ContextTrait;
 use Plume\Core\ArrayTrait;
 use Plume\Core\ConfigTrait;
+use Plume\Async\Core\Daemon;
+
 
 class Application implements \ArrayAccess{
 
@@ -196,6 +198,14 @@ class Application implements \ArrayAccess{
 	}
 
 	public function startWorker($name, $class, $method){
+        //判断是daemon还是worker
+        $instance = new $class($this['plume.env']);
+        if($instance instanceof Daemon){
+            $this->debug("startWorker", $name." is a daemon process");
+            $instance->run();
+            return;
+        }
+        $this->debug("startWorker", $name." is a gearmand worker");
 		$worker= new Worker();
 		$config = $this->getConfig();
 		$server = isset($config['server']) ? $config['server'] : array('127.0.0.1' => 4730);
