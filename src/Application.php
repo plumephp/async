@@ -186,7 +186,7 @@ class Application implements \ArrayAccess{
 				throw new \Exception('fork process for your worker faild!');
 				break;
 			case 0://sub
-				$this->debug('fork::worker','-- startWorker --');
+				//$this->debug('fork::worker','-- startWorker --');
 				$this->startWorker($name, $className, $method);
 				exit;
 				break;
@@ -201,11 +201,11 @@ class Application implements \ArrayAccess{
         //判断是daemon还是worker
         $instance = new $class($this['plume.env']);
         if($instance instanceof Daemon){
-            $this->debug("startWorker", $name." is a daemon process");
+            //$this->debug("startWorker", $name." is a daemon process");
             call_user_func(array($instance, $method));
             return;
         }
-        $this->debug("startWorker", $name." is a gearmand worker");
+        //$this->debug("startWorker", $name." is a gearmand worker");
 		$worker= new Worker();
 		$config = $this->getConfig();
 		$server = isset($config['server']) ? $config['server'] : array('127.0.0.1' => 4730);
