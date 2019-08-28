@@ -106,11 +106,13 @@ class Application implements \ArrayAccess{
 	public function init(){
 		$this->pid = getmypid();
 		//ticks使系统运行产生时间片段，以便配合signal获取
-		//PHP < 5.3
-		if (!function_exists("pcntl_signal_dispatch")) {
-    		declare(ticks=1);
+		//兼容PHP>=7.1以上版本以及php<7.1以下版本
+		$version = (double)substr(PHP_VERSION, 0, 3);
+		if ($version >= 7.1) {
+			pcntl_async_signals(true);
+		} else {
+			declare(ticks = 1);
 		}
-		declare(ticks = 1);
 		error_reporting(E_ALL | E_STRICT);
 		pcntl_signal(SIGCHLD, array($this, 'sighandler'));
 
